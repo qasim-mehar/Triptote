@@ -28,7 +28,8 @@ function App(){
    setItems((items)=>items.map((item)=>item.id==id?{...item,packed: !item.packed}:item));
   }
   function handleClearItems(){
-    setItems([]);
+    const confirmation= window.confirm("Are you sure you want to delete all items");
+    if(confirmation)  setItems([]);
   }
   // console.log(items.length);
  
