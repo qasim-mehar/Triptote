@@ -27,13 +27,16 @@ function App(){
   function handlePackedItem(id){
    setItems((items)=>items.map((item)=>item.id==id?{...item,packed: !item.packed}:item));
   }
+  function handleClearItems(){
+    setItems([]);
+  }
   // console.log(items.length);
  
  return (
  <div className='app'>
            <Logo/>
           <Form onAddItem={handleItems}/>
-          <PackingList items={items} onDeleteItem={handleDeleteItem} onPackedItem={handlePackedItem}/>
+          <PackingList items={items} onDeleteItem={handleDeleteItem} onPackedItem={handlePackedItem} onClearItem={handleClearItems}/>
           <Stats noOfItems={noOfItems} packedItems={packedItems} />
  </div>
         
@@ -89,7 +92,7 @@ function Form({onAddItem}) {
   );
 }
 
-function PackingList({items,onDeleteItem,onPackedItem}){
+function PackingList({items,onDeleteItem,onPackedItem,onClearItem}){
   const [sortBy, setSortBy]=useState("value")
   let sortedItem;
   function sortItem(sortBy){
@@ -111,6 +114,7 @@ function PackingList({items,onDeleteItem,onPackedItem}){
               <option value="packed">sort by packed</option>
             </select>
           </div>
+          <button onClick={()=>onClearItem()}>Clear All Items</button>
         </div>
     
   )
